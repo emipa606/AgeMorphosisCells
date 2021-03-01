@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+	<TargetAgeDesc>Target age is: </TargetAgeDesc>
+	<TargetAgeDescYrs> years.</TargetAgeDescYrs>
+	<CurrentAgeDesc>Current age is: </CurrentAgeDesc>
+	<ChangeTargetAgeDesc>Change the target age to the desired value.</ChangeTargetAgeDesc>
+	<ChangeTargetAge>Change target age.</ChangeTargetAge>
+	<ChooseTargetAge>Choose the target age: </ChooseTargetAge>
+	<EnterAgeMorphosisCell>Entering into the Age Morphosis Cell.</EnterAgeMorphosisCell>
+	<settings_multiplyer_title>Multiplyer</settings_multiplyer_title>
+	<settings_multiplyer_desc>This is applied to the speed of age morphing.</settings_multiplyer_desc>
+	<settings_doMultiply_title>Multiply?</settings_doMultiply_title>
+	<settings_doMultiply_desc>If checked, the speed is multiplyed, if unchecked, the speed is divided.</settings_doMultiply_desc>
+	<Job_CarryToAMCell>Carry {0} to Age Morphosis Cell</Job_CarryToAMCell>
+	<CannotCarryToAMCell>Cannot carry to Age Morphosis Cell</CannotCarryToAMCell>
+	<NoAMCell>No available Age Morphosis Cell.</NoAMCell>
+	
+</LanguageData>

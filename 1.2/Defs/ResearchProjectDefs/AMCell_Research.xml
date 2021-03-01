@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+	<ResearchProjectDef>
+		<defName>AMCell_Research</defName>
+		<label>age morphosis cell research</label>
+		<description>Allows colonists to build Age Morphosis Cells which allow to modify their biological age.</description>
+		<baseCost>1600</baseCost>
+		<techLevel>Spacer</techLevel>
+		<prerequisites>
+			<li>Cryptosleep</li>
+			<li>VitalsMonitor</li>
+		</prerequisites>
+		<requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+		<requiredResearchFacilities>
+			<li>MultiAnalyzer</li>
+		</requiredResearchFacilities>
+		<researchViewX>11</researchViewX>
+		<researchViewY>1.2</researchViewY>
+	</ResearchProjectDef>
+</Defs>

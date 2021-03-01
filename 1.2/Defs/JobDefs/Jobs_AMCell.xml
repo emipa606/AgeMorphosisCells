@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+  <JobDef>
+    <defName>Job_CarryToAMCell</defName>
+    <driverClass>AMCells.JobDriver_CarryToAMCell</driverClass>
+    <reportString>carrying TargetA to age morphosis cell.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+  </JobDef>
+  
+  <JobDef>
+    <defName>Job_EnterAMCell</defName>
+    <driverClass>AMCells.JobDriver_EnterAgeMorphosisCell</driverClass>
+    <reportString>entering age morphosis cell.</reportString>
+  </JobDef>
+  
+</Defs>
