@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using RimWorld;
+﻿using System.Collections.Generic;
 using Verse;
-using UnityEngine;
 using Verse.AI;
 
 namespace AMCells
@@ -14,47 +9,52 @@ namespace AMCells
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
             //return this.pawn.Reserve(this.job.targetA, this.job, 1, -1, null);
-            Pawn pawn = this.pawn;
-            LocalTargetInfo targetA = this.job.targetA;
-            Job job = this.job;
-            return pawn.Reserve(targetA, job, 1, -1, null, errorOnFailed);
+            var pawn1 = pawn;
+            var targetA = job.targetA;
+            var job1 = job;
+            return pawn1.Reserve(targetA, job1, 1, -1, null, errorOnFailed);
         }
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
             this.FailOnDespawnedOrNull(TargetIndex.A);
-            yield return Toils_Reserve.Reserve(TargetIndex.A, 1, -1, null);
+            yield return Toils_Reserve.Reserve(TargetIndex.A);
             yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.InteractionCell);
-            Toil prepare = Toils_General.Wait(500);
+            var prepare = Toils_General.Wait(500);
             prepare.FailOnCannotTouch(TargetIndex.A, PathEndMode.InteractionCell);
-            prepare.WithProgressBarToilDelay(TargetIndex.A, false, -0.5f);
+            prepare.WithProgressBarToilDelay(TargetIndex.A);
             yield return prepare;
             yield return new Toil
             {
                 initAction = delegate
                 {
-                    Pawn actor = CurToil.actor;
-                    Building_AMCell pod = (Building_AMCell)actor.CurJob.targetA.Thing;
-                    Action action = delegate
+                    var actor = CurToil.actor;
+                    var pod = (Building_AMCell)actor.CurJob.targetA.Thing;
+
+                    void Action()
                     {
                         actor.DeSpawn();
-                        pod.TryAcceptThing(actor, true);
-                    };
+                        pod.TryAcceptThing(actor);
+                    }
+
                     if (!pod.def.building.isPlayerEjectable)
                     {
-                        int freeColonistsSpawnedOrInPlayerEjectablePodsCount = this.Map.mapPawns.FreeColonistsSpawnedOrInPlayerEjectablePodsCount;
+                        var freeColonistsSpawnedOrInPlayerEjectablePodsCount =
+                            Map.mapPawns.FreeColonistsSpawnedOrInPlayerEjectablePodsCount;
                         if (freeColonistsSpawnedOrInPlayerEjectablePodsCount <= 1)
                         {
-                            Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("CasketWarning".Translate().AdjustedFor(actor), action, false, null));
+                            Find.WindowStack.Add(
+                                Dialog_MessageBox.CreateConfirmation("CasketWarning".Translate().AdjustedFor(actor),
+                                    Action));
                         }
                         else
                         {
-                            action();
+                            Action();
                         }
                     }
                     else
                     {
-                        action();
+                        Action();
                     }
                 },
                 defaultCompleteMode = ToilCompleteMode.Instant
