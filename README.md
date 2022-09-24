@@ -30,14 +30,6 @@ This mod does not belong to me (Haecriver), it belongs to TheSleeplessSorclock, 
 
 None for now, but let me know !
 
-#  External links  
-
-
-
-    - https://gitlab.com/rimworldmods/age-morphosis-cells]Gitlab.
-
-
-
 ![Image](https://i.imgur.com/PwoNOj4.png)
 
 
@@ -48,5 +40,6 @@ None for now, but let me know !
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
+
 
 
