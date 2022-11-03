@@ -151,12 +151,7 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
             add = innerContainer.TryAdd(thing);
         }
 
-        if (add)
-        {
-            return true;
-        }
-
-        return false;
+        return add;
     }
 
     public virtual void EjectContents()
@@ -343,21 +338,13 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
                 }
 
                 var ticks = (int)(spdfactor * 20);
-                var yearsWannaChange = (float)ticks / 3600000;
-                if (YearsRemaining < yearsWannaChange)
+                if (grow)
                 {
-                    pawn.ageTracker.AgeBiologicalTicks = targetAge * 3600000;
+                    pawn.ageTracker.AgeBiologicalTicks += ticks;
                 }
                 else
                 {
-                    if (grow)
-                    {
-                        pawn.ageTracker.AgeBiologicalTicks += ticks;
-                    }
-                    else
-                    {
-                        pawn.ageTracker.AgeBiologicalTicks -= ticks;
-                    }
+                    pawn.ageTracker.AgeBiologicalTicks -= ticks;
                 }
             }
         }

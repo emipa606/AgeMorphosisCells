@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <ThingDef ParentName="BuildingBase">
+    <defName>AMCell</defName>
+    <label>age morphosis cell</label>
+    <description>An Age Morphosis Cell is used to change the biological age of the target Pawn.</description>
+    <thingClass>AMCells.Building_AMCell</thingClass>
+    <graphicData>
+      <texPath>Things/Building/AMCell</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1, 2)</drawSize>
+      <shadowData>
+        <volume>(0.83, 0.3, 1.7)</volume>
+      </shadowData>
+    </graphicData>
+    <researchPrerequisites>
+      <li>AMCell_Research</li>
+    </researchPrerequisites>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>70</pathCost>
+    <blockWind>true</blockWind>
+    <fillPercent>0.5</fillPercent>
+    <canOverlapZones>false</canOverlapZones>
+    <statBases>
+      <WorkToBuild>8000</WorkToBuild>
+      <MaxHitPoints>200</MaxHitPoints>
+      <Flammability>0</Flammability>
+    </statBases>
+    <tickerType>Normal</tickerType>
+    <size>(1,2)</size>
+    <designationCategory>Misc</designationCategory>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(1,0,0)</interactionCellOffset>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>1500</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Explosive">
+        <explosiveRadius>2.66</explosiveRadius>
+        <explosiveDamageType>Flame</explosiveDamageType>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_AffectedByFacilities">
+        <linkableFacilities>
+          <li>VitalsMonitor</li>
+        </linkableFacilities>
+      </li>
+    </comps>
+    <placeWorkers>
+      <li>PlaceWorker_ShowFacilitiesConnections</li>
+    </placeWorkers>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <building>
+      <isPlayerEjectable>true</isPlayerEjectable>
+    </building>
+    <costList>
+      <Steel>200</Steel>
+      <Uranium>20</Uranium>
+      <ComponentIndustrial>10</ComponentIndustrial>
+      <ComponentSpacer>10</ComponentSpacer>
+    </costList>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationHotKey>Misc2</designationHotKey>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+  </ThingDef>
+</Defs>

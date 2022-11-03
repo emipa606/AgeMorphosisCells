@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+  <settings_modversion>Installed mod-version: {0}</settings_modversion>
   <TargetAgeDesc>Target age is: </TargetAgeDesc>
   <TargetAgeDescYrs> years.</TargetAgeDescYrs>
   <CurrentAgeDesc>Current age is: </CurrentAgeDesc>

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Mlie;
+using UnityEngine;
 using Verse;
 
 namespace AMCells;
@@ -10,6 +11,8 @@ internal class AMCellsMod : Mod
     ///     The instance of the settings to be read by the mod
     /// </summary>
     public static AMCellsMod instance;
+
+    private static string currentVersion;
 
     /// <summary>
     ///     The private settings
@@ -23,6 +26,9 @@ internal class AMCellsMod : Mod
     public AMCellsMod(ModContentPack content) : base(content)
     {
         instance = this;
+        currentVersion =
+            VersionFromManifest.GetVersionFromModMetaData(
+                ModLister.GetActiveModWithIdentifier("Mlie.AgeMorphosisCells"));
     }
 
     /// <summary>
@@ -65,6 +71,14 @@ internal class AMCellsMod : Mod
         listing_Standard.Label("settings_multiplyer_title_new".Translate(Settings.Multiplyer), -1f,
             "settings_multiplyer_desc".Translate());
         listing_Standard.IntAdjuster(ref Settings.Multiplyer, 1);
+        if (currentVersion != null)
+        {
+            listing_Standard.Gap();
+            GUI.contentColor = Color.gray;
+            listing_Standard.Label("settings_modversion".Translate(currentVersion));
+            GUI.contentColor = Color.white;
+        }
+
         listing_Standard.End();
         Settings.Write();
     }

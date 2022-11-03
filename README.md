@@ -5,6 +5,8 @@
 Update of TheSleeplessSorclock, Haecrivers mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=2412772426
 
+- Removed HugsLib dependency
+
 ![Image](https://i.imgur.com/pufA0kM.png)
 
 	
