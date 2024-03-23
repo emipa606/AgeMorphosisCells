@@ -30,6 +30,11 @@ public static class Patches
                 string str3 = "Job_CarryToAMCell".Translate(localTargetInfo2.Thing.LabelCap);
                 var carryToAMCell = DefDatabase<JobDef>.GetNamed("Job_CarryToAMCell");
 
+                var action = (Action)Action1;
+                opts.Add(FloatMenuUtility.DecoratePrioritizedTask(
+                    new FloatMenuOption(str3, action, MenuOptionPriority.Default, null, thing2), pawn, thing2));
+                continue;
+
                 void Action1()
                 {
                     var buildingCryptosleepCasket = Building_AMCell.FindAMCellFor(thing2, pawn) ??
@@ -45,10 +50,6 @@ public static class Patches
                     var job = new Job(carryToAMCell, thing2, buildingCryptosleepCasket) { count = 1 };
                     pawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
                 }
-
-                var action = (Action)Action1;
-                opts.Add(FloatMenuUtility.DecoratePrioritizedTask(
-                    new FloatMenuOption(str3, action, MenuOptionPriority.Default, null, thing2), pawn, thing2));
             }
         }
     }

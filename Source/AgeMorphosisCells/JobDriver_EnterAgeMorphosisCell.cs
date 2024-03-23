@@ -31,12 +31,6 @@ public class JobDriver_EnterAgeMorphosisCell : JobDriver
                 var actor = CurToil.actor;
                 var pod = (Building_AMCell)actor.CurJob.targetA.Thing;
 
-                void Action()
-                {
-                    actor.DeSpawn();
-                    pod.TryAcceptThing(actor);
-                }
-
                 if (!pod.def.building.isPlayerEjectable)
                 {
                     var freeColonistsSpawnedOrInPlayerEjectablePodsCount =
@@ -55,6 +49,14 @@ public class JobDriver_EnterAgeMorphosisCell : JobDriver
                 else
                 {
                     Action();
+                }
+
+                return;
+
+                void Action()
+                {
+                    actor.DeSpawn();
+                    pod.TryAcceptThing(actor);
                 }
             },
             defaultCompleteMode = ToilCompleteMode.Instant

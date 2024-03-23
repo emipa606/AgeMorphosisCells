@@ -27,8 +27,7 @@ internal class AMCellsMod : Mod
     {
         instance = this;
         currentVersion =
-            VersionFromManifest.GetVersionFromModMetaData(
-                ModLister.GetActiveModWithIdentifier("Mlie.AgeMorphosisCells"));
+            VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
     }
 
     /// <summary>
