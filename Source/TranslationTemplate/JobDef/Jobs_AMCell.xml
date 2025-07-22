@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: carrying TargetA to age morphosis cell. -->
+  <Job_CarryToAMCell.reportString>carrying TargetA to age morphosis cell.</Job_CarryToAMCell.reportString>
+  <!-- EN: entering age morphosis cell. -->
+  <Job_EnterAMCell.reportString>entering age morphosis cell.</Job_EnterAMCell.reportString>
+</LanguageData>

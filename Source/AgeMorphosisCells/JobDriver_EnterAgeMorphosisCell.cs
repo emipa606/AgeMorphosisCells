@@ -39,21 +39,21 @@ public class JobDriver_EnterAgeMorphosisCell : JobDriver
                     {
                         Find.WindowStack.Add(
                             Dialog_MessageBox.CreateConfirmation("CasketWarning".Translate().AdjustedFor(actor),
-                                Action));
+                                action));
                     }
                     else
                     {
-                        Action();
+                        action();
                     }
                 }
                 else
                 {
-                    Action();
+                    action();
                 }
 
                 return;
 
-                void Action()
+                void action()
                 {
                     actor.DeSpawn();
                     pod.TryAcceptThing(actor);

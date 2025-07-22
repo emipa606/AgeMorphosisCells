@@ -10,7 +10,7 @@ internal class AMCellsMod : Mod
     /// <summary>
     ///     The instance of the settings to be read by the mod
     /// </summary>
-    public static AMCellsMod instance;
+    public static AMCellsMod Instance;
 
     private static string currentVersion;
 
@@ -25,7 +25,7 @@ internal class AMCellsMod : Mod
     /// <param name="content"></param>
     public AMCellsMod(ModContentPack content) : base(content)
     {
-        instance = this;
+        Instance = this;
         currentVersion =
             VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
     }
@@ -37,14 +37,10 @@ internal class AMCellsMod : Mod
     {
         get
         {
-            if (settings == null)
-            {
-                settings = GetSettings<AMCellsSettings>();
-            }
+            settings ??= GetSettings<AMCellsSettings>();
 
             return settings;
         }
-        set => settings = value;
     }
 
     /// <summary>
@@ -63,22 +59,22 @@ internal class AMCellsMod : Mod
     /// <param name="rect"></param>
     public override void DoSettingsWindowContents(Rect rect)
     {
-        var listing_Standard = new Listing_Standard();
-        listing_Standard.Begin(rect);
-        listing_Standard.CheckboxLabeled("settings_doMultiply_title".Translate(), ref Settings.DoMultiply,
+        var listingStandard = new Listing_Standard();
+        listingStandard.Begin(rect);
+        listingStandard.CheckboxLabeled("settings_doMultiply_title".Translate(), ref Settings.DoMultiply,
             "settings_doMultiply_desc".Translate());
-        listing_Standard.Label("settings_multiplyer_title_new".Translate(Settings.Multiplyer), -1f,
+        listingStandard.Label("settings_multiplyer_title_new".Translate(Settings.Multiplyer), -1f,
             "settings_multiplyer_desc".Translate());
-        listing_Standard.IntAdjuster(ref Settings.Multiplyer, 1);
+        listingStandard.IntAdjuster(ref Settings.Multiplyer, 1);
         if (currentVersion != null)
         {
-            listing_Standard.Gap();
+            listingStandard.Gap();
             GUI.contentColor = Color.gray;
-            listing_Standard.Label("settings_modversion".Translate(currentVersion));
+            listingStandard.Label("settings_modversion".Translate(currentVersion));
             GUI.contentColor = Color.white;
         }
 
-        listing_Standard.End();
+        listingStandard.End();
         Settings.Write();
     }
 }

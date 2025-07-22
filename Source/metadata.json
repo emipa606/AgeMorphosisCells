@@ -2,5 +2,17 @@
   "Continued": true,
   "CanAdd": "0",
   "CanRemove": "2",
-  "PreviewVersion": "1.5"
+  "PreviewVersion": "1.6",
+  "Patches": false,
+  "Defs": true,
+  "Assemblies": true,
+  "LinesOfCode": 23338,
+  "LinesOfXML": 3729,
+  "CodeBaseSize": 70,
+  "LastXmlCleaning": "2025-07-22T20:07:47.9655617+02:00",
+  "SocialImageSet": true,
+  "SearchTags": [
+    "aging",
+    " building"
+  ]
 }

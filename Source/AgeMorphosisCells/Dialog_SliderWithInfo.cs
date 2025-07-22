@@ -13,7 +13,7 @@ public class Dialog_SliderWithInfo : Dialog_Slider
 
     private int curValue;
 
-    public Dialog_SliderWithInfo(Func<int, string> textGetter, int from, int to, Action<int> confirmAction,
+    private Dialog_SliderWithInfo(Func<int, string> textGetter, int from, int to, Action<int> confirmAction,
         int startingValue = -2147483648) : base(textGetter, from, to, confirmAction, startingValue)
     {
         this.textGetter = textGetter;

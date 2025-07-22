@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  <!-- EN: age morphosis cell -->
+  <AMCell.label>age morphosis cell</AMCell.label>
+  <!-- EN: An Age Morphosis Cell is used to change the biological age of the target Pawn. -->
+  <AMCell.description>An Age Morphosis Cell is used to change the biological age of the target Pawn.</AMCell.description>
+</LanguageData>

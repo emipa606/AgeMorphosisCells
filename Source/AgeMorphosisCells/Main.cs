@@ -1,7 +1,5 @@
 ﻿using System.IO;
-using System.Reflection;
 using System.Xml.Linq;
-using HarmonyLib;
 using Verse;
 
 namespace AMCells;
@@ -11,7 +9,6 @@ public class Main
 {
     static Main()
     {
-        new Harmony("Mlie.AMCells").PatchAll(Assembly.GetExecutingAssembly());
         var hugsLibConfig = Path.Combine(GenFilePaths.SaveDataFolderPath, Path.Combine("HugsLib", "ModSettings.xml"));
         if (!new FileInfo(hugsLibConfig).Exists)
         {
@@ -30,12 +27,12 @@ public class Main
         {
             if (modSetting.Name == "multiplyer")
             {
-                AMCellsMod.instance.Settings.Multiplyer = int.Parse(modSetting.Value);
+                AMCellsMod.Instance.Settings.Multiplyer = int.Parse(modSetting.Value);
             }
 
             if (modSetting.Name == "doMultiply")
             {
-                AMCellsMod.instance.Settings.DoMultiply = bool.Parse(modSetting.Value);
+                AMCellsMod.Instance.Settings.DoMultiply = bool.Parse(modSetting.Value);
             }
         }
 

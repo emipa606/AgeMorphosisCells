@@ -128,7 +128,7 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
         base.Destroy(mode);
     }
 
-    public virtual bool Accepts(Thing thing)
+    protected virtual bool Accepts(Thing thing)
     {
         return innerContainer.CanAcceptAnyOf(thing);
     }
@@ -154,7 +154,7 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
         return add;
     }
 
-    public virtual void EjectContents()
+    protected virtual void EjectContents()
     {
         innerContainer.TryDropAll(InteractionCell, Map, ThingPlaceMode.Near);
     }
@@ -197,12 +197,7 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
             gizmoList.Add(gizmo);
         }
 
-        if (Faction != Faction.OfPlayer)
-        {
-            return gizmoList;
-        }
-
-        if (destroyedFlag)
+        if (Faction != Faction.OfPlayer || destroyedFlag)
         {
             return gizmoList;
         }
@@ -259,7 +254,7 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
         }
     }
 
-    public static Building_AMCell FindAMCellFor(Pawn p, Pawn traveler, bool ignoreOtherReservations = false)
+    public static Building_AMCell FindAmCellFor(Pawn p, Pawn traveler, bool ignoreOtherReservations = false)
     {
         var allDefs =
             from def in DefDatabase<ThingDef>.AllDefs
@@ -292,10 +287,10 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
         }
 
         base.TickRare();
-        DoTickerWork(250);
+        doTickerWork(250);
     }
 
-    public override void Tick()
+    protected override void Tick()
     {
         if (destroyedFlag)
         {
@@ -304,11 +299,11 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
 
         base.Tick();
 
-        DoTickerWork(1);
+        doTickerWork(1);
     }
 
 
-    private void DoTickerWork(int tickerAmount)
+    private void doTickerWork(int tickerAmount)
     {
         if (compPowerTrader.PowerOn)
         {
@@ -328,13 +323,13 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
                    100% speed is 1 year to 3 days (year is 60 days), so 20:1 ratio.
                    1 year is 3,600,000 ticks. 1 day is 60,000 ticks.
                     */
-                if (AMCellsMod.instance.Settings.DoMultiply)
+                if (AMCellsMod.Instance.Settings.DoMultiply)
                 {
-                    spdfactor *= AMCellsMod.instance.Settings.Multiplyer;
+                    spdfactor *= AMCellsMod.Instance.Settings.Multiplyer;
                 }
                 else
                 {
-                    spdfactor /= AMCellsMod.instance.Settings.Multiplyer;
+                    spdfactor /= AMCellsMod.Instance.Settings.Multiplyer;
                 }
 
                 var ticks = (int)(spdfactor * 20);

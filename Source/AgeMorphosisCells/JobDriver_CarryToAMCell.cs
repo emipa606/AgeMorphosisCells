@@ -10,9 +10,9 @@ public class JobDriver_CarryToAMCell : JobDriver
 
     private const TargetIndex DropPodInd = TargetIndex.B;
 
-    protected Pawn Takee => (Pawn)job.GetTarget(TargetIndex.A).Thing;
+    private Pawn Takee => (Pawn)job.GetTarget(TargetIndex.A).Thing;
 
-    protected Building_AMCell DropPod => (Building_AMCell)job.GetTarget(TargetIndex.B).Thing;
+    private Building_AMCell DropPod => (Building_AMCell)job.GetTarget(TargetIndex.B).Thing;
 
     public override bool TryMakePreToilReservations(bool errorOnFailed)
     {
