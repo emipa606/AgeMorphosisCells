@@ -1,34 +1,50 @@
-# GitHub Copilot Instructions for the Age Morphosis Cells Mod
+# GitHub Copilot Instructions for RimWorld Modding Project: Age Morphosis Cells (Continued)
 
-### Mod Overview and Purpose
-The Age Morphosis Cells (AMCells) mod introduces advanced biological processing units called Age Morphosis Cells into RimWorld. These cells allow colonists to undergo controlled aging and rejuvenation, offering strategic benefits for managing colonists' age-related traits and health conditions. The mod aims to add a layer of depth to colony management and enhance player engagement with age dynamics.
+## Mod Overview and Purpose
 
-### Key Features and Systems
-- **Age Morphosis Cells Structures:** Implementable buildings that allow colonists to enter and undergo the aging process.
-- **Colonist Interaction:** Colonists can carry others to the cells, enter them, and perform age or rejuvenation processes.
-- **Configurable Settings:** Modifiable settings are available to customize the behavior of Age Morphosis Cells using in-game menus.
-- **Dynamic UI Elements:** Sliders and dialogs facilitate user interaction and settings adjustments.
+**Mod Name:** Age Morphosis Cells (Continued)
 
-### Coding Patterns and Conventions
-- **Class and Method Naming:** Classes and methods follow a clear, descriptive naming convention. For instance, `Building_AMCell` describes the building entity, while `JobDriver_CarryToAMCell` indicates the specific job for carrying tasks.
-- **Internal and Public Access:** Internal classes like `AMCellsMod` and `AMCellsSettings` are limited to the mod's internal operations, while public classes such as `Building_AMCell` interact more openly within the game's ecosystem.
-- **Inheritance and Interfaces:** Utilize inheritance and interfaces (e.g., `IThingHolder`, `IOpenable`) for structuring classes that extend game functionality.
-- **Event-Driven Design:** Methods such as `DoTickerWork` are strategically used to integrate with RimWorld's timed events.
+This mod introduces a new building to RimWorld, the Age Morphosis Cell, which functions similarly to a cryptosleep casket but accelerates the aging of a pawn who enters it. Users can customize the aging rate via the mod settings menu. The building requires power to operate. Originally created by TheSleeplessSorclock, this mod has been updated and maintained by Haecriver.
 
-### XML Integration
-While the provided summary doesn't list specific XML files, XML is typically used for defining game data such as item properties, recipes, and other configurations. In this mod, ensure that XML files align with C# logic to maintain consistency in features like object instantiation and in-game settings.
+## Key Features and Systems
 
-### Harmony Patching
-The mod utilizes Harmony for modifying the game's core behavior without altering original code:
-- **Static Patching Classes:** `Patches` class includes nested static classes like `FloatMenuMakerCarryAdder` to insert additional menu options when carrying items to AMCells.
-- **Method Prefixes and Postfixes:** Use Harmony annotations to add logic before or after specific game methods.
-- **Selective Patching:** Patch only necessary methods to maintain game stability and minimize conflicts with other mods.
+- **Age Morphosis Cell:** A new building type that accelerates the aging process of characters in the game.
+- **Modular Aging Rate:** Users can adjust how quickly the aging process occurs using a slider in the mod settings.
+- **Power Dependency:** The Age Morphosis Cell requires a power connection to function.
+- **Integration with Other Mods:** The mod works best with the "Babies and Children" mod, enhancing its impact by providing an option to accelerate growth stages.
 
-### Suggestions for Copilot
-- **Expanding Features:** Assist in generating new building types or interaction methods.
-- **Boilerplate Code:** Generate templates for new Harmony patches or additional sliders.
-- **UI Enhancements:** Suggest and auto-complete code for custom dialogs or interactive elements.
-- **Debugging Assistance:** Provide debug logging integration snippets to trace mod behavior.
-- **Code Refactoring:** Suggest optimizations or refactorings for existing methods and classes.
+## Known Issues
 
-By leveraging GitHub Copilot, developers can streamline coding tasks, enhance mod features, and maintain high-quality code that adheres to RimWorld modding standards.
+- Currently, no known issues have been reported. Users are encouraged to report any encountered bugs.
+
+## Coding Patterns and Conventions
+
+The codebase follows these patterns and conventions:
+
+1. **Namespace and Class Organization:** Files are structured using C# classes with internal and public access modifiers to encapsulate functionality. 
+2. **Inheritance from Base Classes:** Many classes extend RimWorld-specific base classes like `Building`, `IThingHolder`, `IOpenable`, `JobDriver`, etc., to ensure the mod integrates well with the game's existing architecture.
+3. **Method Naming:** Methods are intuitively named to reflect their functionality, such as `GetDirectlyHeldThings`, `GetChildHolders`, and `doTickerWork`.
+
+## XML Integration
+
+- RimWorld mods often use XML files for defining static data and integrating with the game's data-driven architecture. While this particular mod focuses heavily on C# for behavior, any XML integration should align with RimWorld's modding framework for consistent data representation.
+
+## Harmony Patching
+
+The mod doesn't explicitly mention Harmony patches; however, if necessary, Harmony can be used to patch RimWorld core behaviors. This involves:
+
+1. **Creating a Harmony Instance:** To apply patches programmatically, using a Harmony instance.
+2. **Defining Prefix/Postfix Methods:** Attach methods that run before or after a target method.
+3. **Ensure Compatibility:** Write patches that ensure compatibility without altering or breaking existing game functionality.
+
+## Suggestions for Copilot
+
+Here's how GitHub Copilot can assist in this RimWorld modding project:
+
+1. **Code Completion:** Use Copilot to suggest method implementations and fill in class methods quickly based on existing patterns.
+2. **Syntax Suggestions:** Leverage Copilot for syntax corrections and optimizations especially when dealing with complex C# constructs.
+3. **XML Configuration:** Generate boilerplate code for XML data files to integrate seamlessly with RimWorld’s data-driven mechanisms.
+4. **Harmony Patching Examples:** Suggestive snippets for common Harmony patching patterns like Prefixes and Postfixes.
+5. **Best Practices Suggestions:** Receive recommendations for adhering to C# best practices, enhancing code readability, and maintainability.
+
+By leveraging Copilot, development efficiency can be increased, focusing more on design and integration rather than detailed manual coding.

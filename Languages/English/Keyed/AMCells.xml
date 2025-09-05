@@ -15,5 +15,6 @@
   <settings_doMultiply_desc>If checked, the speed is multiplyed, if unchecked, the speed is divided.</settings_doMultiply_desc>
   <Job_CarryToAMCell>Carry {0} to Age Morphosis Cell</Job_CarryToAMCell>
   <CannotCarryToAMCell>Cannot carry to Age Morphosis Cell</CannotCarryToAMCell>
+  <AMCellCompleted>{0} morphosis to age {1} completed</AMCellCompleted>
   <NoAMCell>No available Age Morphosis Cell.</NoAMCell>
 </LanguageData>

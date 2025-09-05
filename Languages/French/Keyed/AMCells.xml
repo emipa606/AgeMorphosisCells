@@ -17,4 +17,5 @@
   <Job_CarryToAMCell>Portez {0} à Cellule de Morphose d'Age</Job_CarryToAMCell>
   <CannotCarryToAMCell>Ne peut pas porter à l'âge Morphosis Cell</CannotCarryToAMCell>
   <NoAMCell>Non disponible Age Morphosis Cell.</NoAMCell>
+  <AMCellCompleted>{0} morphose vers l'âge {1} terminée</AMCellCompleted>
 </LanguageData>

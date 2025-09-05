@@ -10,9 +10,9 @@ public class JobDriver_CarryToAMCell : JobDriver
 
     private const TargetIndex DropPodInd = TargetIndex.B;
 
-    private Pawn Takee => (Pawn)job.GetTarget(TargetIndex.A).Thing;
+    private Pawn Takee => (Pawn)job.GetTarget(TakeeInd).Thing;
 
-    private Building_AMCell DropPod => (Building_AMCell)job.GetTarget(TargetIndex.B).Thing;
+    private Building_AMCell DropPod => (Building_AMCell)job.GetTarget(DropPodInd).Thing;
 
     public override bool TryMakePreToilReservations(bool errorOnFailed)
     {
@@ -21,41 +21,41 @@ public class JobDriver_CarryToAMCell : JobDriver
         var pawn1 = pawn;
         LocalTargetInfo target = Takee;
         var job1 = job;
-        bool arg_58_0;
+        bool arg580;
         if (pawn1.Reserve(target, job1, 1, -1, null, errorOnFailed))
         {
             pawn1 = pawn;
             target = DropPod;
             job1 = job;
-            arg_58_0 = pawn1.Reserve(target, job1, 1, -1, null, errorOnFailed);
+            arg580 = pawn1.Reserve(target, job1, 1, -1, null, errorOnFailed);
         }
         else
         {
-            arg_58_0 = false;
+            arg580 = false;
         }
 
-        return arg_58_0;
+        return arg580;
     }
 
     protected override IEnumerable<Toil> MakeNewToils()
     {
-        this.FailOnDestroyedOrNull(TargetIndex.A);
-        this.FailOnDestroyedOrNull(TargetIndex.B);
-        this.FailOnAggroMentalState(TargetIndex.A);
-        yield return Toils_Reserve.Reserve(TargetIndex.A);
-        yield return Toils_Reserve.Reserve(TargetIndex.B);
-        yield return Toils_Goto.GotoThing(TargetIndex.A, PathEndMode.OnCell)
-            .FailOnDestroyedNullOrForbidden(TargetIndex.A)
-            .FailOnDespawnedNullOrForbidden(TargetIndex.B)
+        this.FailOnDestroyedOrNull(TakeeInd);
+        this.FailOnDestroyedOrNull(DropPodInd);
+        this.FailOnAggroMentalState(TakeeInd);
+        yield return Toils_Reserve.Reserve(TakeeInd);
+        yield return Toils_Reserve.Reserve(DropPodInd);
+        yield return Toils_Goto.GotoThing(TakeeInd, PathEndMode.OnCell)
+            .FailOnDestroyedNullOrForbidden(TakeeInd)
+            .FailOnDespawnedNullOrForbidden(DropPodInd)
             .FailOn(() => DropPod.GetDirectlyHeldThings().Count > 0)
             .FailOn(() => !Takee.Downed)
             .FailOn(() => !pawn.CanReach(Takee, PathEndMode.OnCell, Danger.Deadly))
-            .FailOnSomeonePhysicallyInteracting(TargetIndex.A);
-        yield return Toils_Haul.StartCarryThing(TargetIndex.A);
-        yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.InteractionCell);
+            .FailOnSomeonePhysicallyInteracting(TakeeInd);
+        yield return Toils_Haul.StartCarryThing(TakeeInd);
+        yield return Toils_Goto.GotoThing(DropPodInd, PathEndMode.InteractionCell);
         var prepare = Toils_General.Wait(500);
-        prepare.FailOnCannotTouch(TargetIndex.B, PathEndMode.InteractionCell);
-        prepare.WithProgressBarToilDelay(TargetIndex.B);
+        prepare.FailOnCannotTouch(DropPodInd, PathEndMode.InteractionCell);
+        prepare.WithProgressBarToilDelay(DropPodInd);
         yield return prepare;
         yield return new Toil
         {

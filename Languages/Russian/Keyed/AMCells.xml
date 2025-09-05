@@ -17,4 +17,5 @@
   <Job_CarryToAMCell>Перенести {0} в ячейку "Морфоз возраста</Job_CarryToAMCell>
   <CannotCarryToAMCell>Не переносится на возрастную клетку Морфоз</CannotCarryToAMCell>
   <NoAMCell>Нет данных Возрастная клетка морфоза.</NoAMCell>
+  <AMCellCompleted>{0} Морфоз до возраста {1} завершен</AMCellCompleted>
 </LanguageData>

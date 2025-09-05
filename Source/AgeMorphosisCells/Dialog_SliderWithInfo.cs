@@ -35,21 +35,22 @@ public class Dialog_SliderWithInfo : Dialog_Slider
 
     public override void DoWindowContents(Rect inRect)
     {
-        var rect = new Rect(inRect.x, inRect.y + 15f, inRect.width, 30f);
+        var rect = new Rect(inRect.x, inRect.y + TopPadding, inRect.width, BotAreaHeight);
         Text.Font = GameFont.Small;
 
         curValue = (int)Widgets.HorizontalSlider(rect, curValue, from, to, true, textGetter(curValue), null, null,
             1f);
         Text.Font = GameFont.Small;
-        var rect3 = new Rect(inRect.x + (inRect.width / 2f) + 70, inRect.y + 10f, inRect.width, 30f);
+        var rect3 = new Rect(inRect.x + (inRect.width / 2f) + 70, inRect.y + 10f, inRect.width, BotAreaHeight);
         Widgets.TextArea(rect3, curValue.ToString(), true);
-        var rect1 = new Rect(inRect.x, inRect.yMax - 30f, inRect.width / 2f, 30f);
+        var rect1 = new Rect(inRect.x, inRect.yMax - BotAreaHeight, inRect.width / 2f, BotAreaHeight);
         if (Widgets.ButtonText(rect1, "CancelButton".Translate(), true, false))
         {
             Close();
         }
 
-        var rect2 = new Rect(inRect.x + (inRect.width / 2f), inRect.yMax - 30f, inRect.width / 2f, 30f);
+        var rect2 = new Rect(inRect.x + (inRect.width / 2f), inRect.yMax - BotAreaHeight, inRect.width / 2f,
+            BotAreaHeight);
         if (!Widgets.ButtonText(rect2, "OK".Translate(), true, false))
         {
             return;

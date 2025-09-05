@@ -17,4 +17,5 @@
   <Job_CarryToAMCell>携带{0}到年龄变形单元</Job_CarryToAMCell>
   <CannotCarryToAMCell>不能携带到年龄变形细胞</CannotCarryToAMCell>
   <NoAMCell>没有可用的年龄 Morphosis细胞。</NoAMCell>
+  <AMCellCompleted>{0} 年龄蜕变 {1} 已完成</AMCellCompleted>
 </LanguageData>

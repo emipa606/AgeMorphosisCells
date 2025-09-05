@@ -9,28 +9,23 @@ using Verse.AI;
 
 namespace AMCells;
 
-public class Building_AMCell : Building, IThingHolder, IOpenable
+public class Building_AMCell : Building, ISuspendableThingHolder, IOpenable
 {
-    protected CompAffectedByFacilities compAffectedByFac;
-    protected CompFlickable compFlickable;
-    protected CompPowerTrader compPowerTrader;
+    private CompPowerTrader compPowerTrader;
 
     private bool destroyedFlag;
 
-    protected ThingOwner innerContainer;
+    private ThingOwner innerContainer;
 
-    protected int targetAge = 16;
+    private int targetAge = 16;
 
     public Building_AMCell()
     {
         innerContainer = new ThingOwner<Thing>(this, false);
     }
 
-    public bool HasAnyContents => innerContainer.Count > 0;
 
-    public Thing ContainedThing => innerContainer.Count != 0 ? innerContainer[0] : null;
-
-    public bool IsVitalMonitorsConnected => compAffectedByFac.LinkedFacilitiesListForReading.Count > 0;
+    private bool HasAnyContents => innerContainer.Count > 0;
 
 
     private float YearsRemaining
@@ -50,7 +45,6 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
         }
     }
 
-    private bool HasJob => HasAnyContents && Math.Abs(YearsRemaining) >= 0.02;
     private bool FinishedJob => HasAnyContents && Math.Abs(YearsRemaining) <= 0.02;
 
     public int OpenTicks => 100;
@@ -77,13 +71,15 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
         ThingOwnerUtility.AppendThingHoldersFromThings(outChildren, GetDirectlyHeldThings());
     }
 
+    public bool IsContentsSuspended => base.Suspended || compPowerTrader.PowerOn;
+
 
     public override void SpawnSetup(Map map, bool respawningAfterLoad)
     {
         base.SpawnSetup(map, respawningAfterLoad);
         compPowerTrader = GetComp<CompPowerTrader>();
-        compFlickable = GetComp<CompFlickable>();
-        compAffectedByFac = GetComp<CompAffectedByFacilities>();
+        GetComp<CompFlickable>();
+        GetComp<CompAffectedByFacilities>();
     }
 
 
@@ -128,30 +124,26 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
         base.Destroy(mode);
     }
 
-    protected virtual bool Accepts(Thing thing)
+    private bool accepts(Thing thing)
     {
         return innerContainer.CanAcceptAnyOf(thing);
     }
 
-    public virtual bool TryAcceptThing(Thing thing, bool allowSpecialEffects = true)
+    public void TryAcceptThing(Thing thing)
     {
-        if (!Accepts(thing))
+        if (!accepts(thing))
         {
-            return false;
+            return;
         }
 
-        bool add;
         if (thing.holdingOwner != null)
         {
             thing.holdingOwner.TryTransferToContainer(thing, innerContainer, thing.stackCount);
-            add = true;
         }
         else
         {
-            add = innerContainer.TryAdd(thing);
+            innerContainer.TryAdd(thing);
         }
-
-        return add;
     }
 
     protected virtual void EjectContents()
@@ -208,7 +200,6 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
             defaultDesc = "ChangeTargetAgeDesc".Translate(),
             defaultLabel = "ChangeTargetAge".Translate(),
             activateSound = SoundDef.Named("Click"),
-            //raiseAgeGizmo.action = new Action(RaiseBy1);
             action = () =>
             {
                 Find.WindowStack.Add(new Dialog_SliderWithInfo("ChooseTargetAge".Translate(), 1, 100,
@@ -243,13 +234,13 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
             var jobDef = DefDatabase<JobDef>.GetNamed("Job_EnterAMCell");
             string jobStr = "EnterAgeMorphosisCell".Translate();
 
-            void JobAction()
+            void jobAction()
             {
                 var job = new Job(jobDef, this);
                 myPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
             }
 
-            yield return FloatMenuUtility.DecoratePrioritizedTask(new FloatMenuOption(jobStr, JobAction),
+            yield return FloatMenuUtility.DecoratePrioritizedTask(new FloatMenuOption(jobStr, jobAction),
                 myPawn, this);
         }
     }
@@ -264,30 +255,19 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
         while (enumerator.MoveNext())
         {
             var current = enumerator.Current;
-            var Building_AMCell1 = (Building_AMCell)GenClosest.ClosestThingReachable(p.Position, p.Map,
+            var buildingAmCell1 = (Building_AMCell)GenClosest.ClosestThingReachable(p.Position, p.Map,
                 ThingRequest.ForDef(current), PathEndMode.InteractionCell, TraverseParms.For(traveler), 9999f,
                 x => !((Building_AMCell)x).HasAnyContents &&
                      traveler.CanReserve(x, 1, -1, null, ignoreOtherReservations));
-            if (Building_AMCell1 == null)
+            if (buildingAmCell1 == null)
             {
                 continue;
             }
 
-            return Building_AMCell1;
+            return buildingAmCell1;
         }
 
         return null;
-    }
-
-    public override void TickRare()
-    {
-        if (destroyedFlag)
-        {
-            return;
-        }
-
-        base.TickRare();
-        doTickerWork(250);
     }
 
     protected override void Tick()
@@ -299,11 +279,11 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
 
         base.Tick();
 
-        doTickerWork(1);
+        doTickerWork();
     }
 
 
-    private void doTickerWork(int tickerAmount)
+    private void doTickerWork()
     {
         if (compPowerTrader.PowerOn)
         {
@@ -344,10 +324,14 @@ public class Building_AMCell : Building, IThingHolder, IOpenable
             }
         }
 
-        //this.innerContainer.ThingOwnerTick(true);
-        if (FinishedJob)
+        if (!FinishedJob)
         {
-            Open();
+            return;
         }
+
+        var completePawn = (Pawn)innerContainer.First();
+        Open();
+        Messages.Message("AMCellCompleted".Translate(completePawn.NameFullColored, targetAge), completePawn,
+            MessageTypeDefOf.PositiveEvent);
     }
 }
