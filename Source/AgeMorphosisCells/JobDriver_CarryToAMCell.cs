@@ -16,8 +16,6 @@ public class JobDriver_CarryToAMCell : JobDriver
 
     public override bool TryMakePreToilReservations(bool errorOnFailed)
     {
-        //return (!this.pawn.Reserve(this.Takee, this.job, 1, -1, null) ? false : this.pawn.Reserve(this.DropPod, this.job, 1, -1, null));
-
         var pawn1 = pawn;
         LocalTargetInfo target = Takee;
         var job1 = job;

@@ -6,4 +6,19 @@
     <BuildType Name="Release" />
   </Configurations>
   <Project Path="AgeMorphosisCells/AMCells.csproj" />
+  <Folder Name="/XML/1.7/Defs/JobDefs/">
+    <File Path="../1.7/Defs/JobDefs/Jobs_AMCell.xml" />
+  </Folder>
+  <Folder Name="/XML/About/">
+    <File Path="../About/about.xml" />
+  </Folder>
+  <Folder Name="/XML/1.7/Defs/ResearchProjectDefs/">
+    <File Path="../1.7/Defs/ResearchProjectDefs/AMCell_Research.xml" />
+  </Folder>
+  <Folder Name="/XML/Languages/English/Keyed/">
+    <File Path="../Languages/English/Keyed/AMCells.xml" />
+  </Folder>
+  <Folder Name="/XML/1.7/Defs/ThingsDefs_Buildings/">
+    <File Path="../1.7/Defs/ThingsDefs_Buildings/AMCell.xml" />
+  </Folder>
 </Solution>

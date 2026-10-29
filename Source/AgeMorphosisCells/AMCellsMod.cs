@@ -15,11 +15,6 @@ internal class AMCellsMod : Mod
     private static string currentVersion;
 
     /// <summary>
-    ///     The private settings
-    /// </summary>
-    private AMCellsSettings settings;
-
-    /// <summary>
     ///     Constructor
     /// </summary>
     /// <param name="content"></param>
@@ -37,9 +32,9 @@ internal class AMCellsMod : Mod
     {
         get
         {
-            settings ??= GetSettings<AMCellsSettings>();
+            field ??= GetSettings<AMCellsSettings>();
 
-            return settings;
+            return field;
         }
     }
 
@@ -56,11 +51,11 @@ internal class AMCellsMod : Mod
     ///     The settings-window
     ///     For more info: https://rimworldwiki.com/wiki/Modding_Tutorials/ModSettings
     /// </summary>
-    /// <param name="rect"></param>
-    public override void DoSettingsWindowContents(Rect rect)
+    /// <param name="inRect"></param>
+    public override void DoSettingsWindowContents(Rect inRect)
     {
         var listingStandard = new Listing_Standard();
-        listingStandard.Begin(rect);
+        listingStandard.Begin(inRect);
         listingStandard.CheckboxLabeled("settings_doMultiply_title".Translate(), ref Settings.DoMultiply,
             "settings_doMultiply_desc".Translate());
         listingStandard.Label("settings_multiplyer_title_new".Translate(Settings.Multiplyer), -1f,

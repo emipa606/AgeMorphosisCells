@@ -41,7 +41,7 @@ public class Building_AMCell : Building, ISuspendableThingHolder, IOpenable
                 }
             }
 
-            return targetAge - fAge; // if positive = grow up; if negative = grow down;
+            return targetAge - fAge;
         }
     }
 
@@ -212,9 +212,9 @@ public class Building_AMCell : Building, ISuspendableThingHolder, IOpenable
         return gizmoList;
     }
 
-    public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn myPawn)
+    public override IEnumerable<FloatMenuOption> GetFloatMenuOptions(Pawn selPawn)
     {
-        foreach (var o in base.GetFloatMenuOptions(myPawn))
+        foreach (var o in base.GetFloatMenuOptions(selPawn))
         {
             yield return o;
         }
@@ -224,7 +224,7 @@ public class Building_AMCell : Building, ISuspendableThingHolder, IOpenable
             yield break;
         }
 
-        if (!myPawn.CanReach(this, PathEndMode.InteractionCell, Danger.Deadly))
+        if (!selPawn.CanReach(this, PathEndMode.InteractionCell, Danger.Deadly))
         {
             var failer = new FloatMenuOption("CannotUseNoPath".Translate(), null);
             yield return failer;
@@ -237,11 +237,11 @@ public class Building_AMCell : Building, ISuspendableThingHolder, IOpenable
             void jobAction()
             {
                 var job = new Job(jobDef, this);
-                myPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
+                selPawn.jobs.TryTakeOrderedJob(job, JobTag.Misc);
             }
 
             yield return FloatMenuUtility.DecoratePrioritizedTask(new FloatMenuOption(jobStr, jobAction),
-                myPawn, this);
+                selPawn, this);
         }
     }
 
@@ -298,11 +298,6 @@ public class Building_AMCell : Building, ISuspendableThingHolder, IOpenable
 
                 var grow = YearsRemaining > 0;
                 float spdfactor = 1;
-                /*
-                   TODO: add worker Pawn stats after. Basically; 1 science = 20% speed; 5 sci = 100% speed; 20 sci = 400% speed.
-                   100% speed is 1 year to 3 days (year is 60 days), so 20:1 ratio.
-                   1 year is 3,600,000 ticks. 1 day is 60,000 ticks.
-                    */
                 if (AMCellsMod.Instance.Settings.DoMultiply)
                 {
                     spdfactor *= AMCellsMod.Instance.Settings.Multiplyer;
@@ -329,7 +324,7 @@ public class Building_AMCell : Building, ISuspendableThingHolder, IOpenable
             return;
         }
 
-        var completePawn = (Pawn)innerContainer.First();
+        var completePawn = (Pawn)innerContainer[0];
         Open();
         Messages.Message("AMCellCompleted".Translate(completePawn.NameFullColored, targetAge), completePawn,
             MessageTypeDefOf.PositiveEvent);

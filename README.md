@@ -1,15 +1,15 @@
 # [Age Morphosis Cells (Continued)](https://steamcommunity.com/sharedfiles/filedetails/?id=2616426855)
 
-![Image](https://i.imgur.com/buuPQel.png)
+![Image](https://img.litet.net/logos/Info.png)
 
 Update of TheSleeplessSorclock, Haecrivers mod
 https://steamcommunity.com/sharedfiles/filedetails/?id=2412772426
 
 - Removed HugsLib and Harmony dependency
 
-![Image](https://i.imgur.com/pufA0kM.png)
+![Image](https://img.litet.net/logos/Notice.png)
 	
-![Image](https://i.imgur.com/Z4GOv8H.png)
+![Image](https://img.litet.net/logos/OriginalDescription.png)
 
 #  Age Morphosis Cells 
 
@@ -31,13 +31,13 @@ This mod does not belong to me (Haecriver), it belongs to TheSleeplessSorclock, 
 
 None for now, but let me know !
 
-![Image](https://i.imgur.com/PwoNOj4.png)
+![Image](https://img.litet.net/logos/ReportingIssues.png)
 
 
 
 -  See if the the error persists if you just have this mod and its requirements active.
 -  If not, try adding your other mods until it happens again.
--  Post your error-log using the [Log Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) or the standalone [Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404) and command Ctrl+F12
+-  Always post your log using the [Log Uploader](https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404)
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
@@ -45,4 +45,4 @@ None for now, but let me know !
 
  
 
-[![Image](https://img.shields.io/github/v/release/emipa606/AgeMorphosisCells?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2616426855) | tags: aging,  building
+[![Image](https://img.shields.io/github/v/release/emipa606/AgeMorphosisCells?label=latest%20version&style=plastic&color=9f1111&labelColor=black)](https://steamcommunity.com/sharedfiles/filedetails/changelog/2616426855) | aging, building

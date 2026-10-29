@@ -21,7 +21,6 @@ public class Dialog_SliderWithInfo : Dialog_Slider
         this.to = to;
         this.confirmAction = confirmAction;
         forcePause = true;
-        //this.closeOnEscapeKey = true;
 
         closeOnClickedOutside = true;
         curValue = startingValue != -2147483648 ? startingValue : from;

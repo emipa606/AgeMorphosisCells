@@ -5,7 +5,7 @@ using Verse;
 namespace AMCells;
 
 [StaticConstructorOnStartup]
-public class Main
+public static class Main
 {
     static Main()
     {
@@ -36,7 +36,7 @@ public class Main
             }
         }
 
-        xml.Root.Element("AgeMorphosisCells")?.Remove();
+        xml.Root?.Element("AgeMorphosisCells")?.Remove();
         xml.Save(hugsLibConfig);
 
         Log.Message("[AgeMorphosisCells]: Imported old HugLib-settings");
